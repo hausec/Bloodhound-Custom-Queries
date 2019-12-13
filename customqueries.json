@@ -36,6 +36,15 @@
                 }
             ]
         },
+			{
+            "name": "List all High Valued Targets",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH (m) WHERE m.highvalue=TRUE RETURN m"
+                }
+            ]
+        },
         {
 
             "name": "Find all Kerberoastable Users",
@@ -311,7 +320,7 @@
                 }
             ]
         },
-		{
+        {
             "name": "Find users that have never logged on and account is still active",
             "queryList": [
                 {
@@ -319,6 +328,15 @@
                     "query": "MATCH (n:User) WHERE n.lastlogontimestamp=-1.0 AND n.enabled=TRUE RETURN n "
                 }
             ]
-        }		
+        },
+        {
+            "name": "Can an object in one domain do something to another",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH p=(n)-[r]->(m) WHERE NOT n.domain = m.domain RETURN p"
+                }
+            ]
+        }	
 	]
 }
