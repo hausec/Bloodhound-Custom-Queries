@@ -23,7 +23,7 @@
             "queryList": [
                 {
                     "final": true,
-                    "query": "MATCH (m:User) WHERE m.owned=TRUE RETURN m"
+                    "query": "MATCH (m:Group) WHERE m.owned=TRUE RETURN m"
                 }
             ]
         },
