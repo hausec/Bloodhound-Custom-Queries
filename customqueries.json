@@ -128,27 +128,6 @@
                 }
             ]
         },
-        {
-            "name": "Can a user from domain ‘A ‘ do anything to any computer in domain ‘B’ (Warning: VERY Heavy)",
-            "queryList": [
-                {
-                    "final": false,
-                    "title": "Select source domain...",
-                    "query": "MATCH (n:Domain) RETURN n.name ORDER BY n.name DESC"
-                },
-				{
-                    "final": false,
-                    "title": "Select destination domain...",
-                    "query": "MATCH (n:Domain) RETURN n.name ORDER BY n.name DESC"
-                },
-                {
-                    "final": true,
-                    "query": "MATCH (n:User {domain: {result}}) MATCH (m:Computer {domain: {}}) MATCH p=allShortestPaths((n)-[r:MemberOf|HasSession|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner|CanRDP|ExecuteDCOM|AllowedToDelegate|ReadLAPSPassword|Contains|GpLink|AddAllowedToAct|AllowedToAct|SQLAdmin*1..]->(m)) RETURN p",
-                    "startNode": "{}",
-                    "allowCollapse": false
-                }
-            ]
-        },
 		{
             "name": "Find all computers with Unconstrained Delegation",
             "queryList": [
@@ -330,11 +309,28 @@
             ]
         },
         {
-            "name": "Can an object in one domain do something to another",
+            "name": "Find an object in one domain that can do something to a foreign object",
             "queryList": [
                 {
                     "final": true,
                     "query": "MATCH p=(n)-[r]->(m) WHERE NOT n.domain = m.domain RETURN p"
+                }
+            ]
+        },
+        {
+            "name": "Find an object from domain 'A' that can do anything to a foreign object",
+			"requireNodeSelect": true,
+            "queryList": [
+                {
+                    "final": false,
+                    "title": "Select source domain...",
+                    "query": "MATCH (n:Domain) RETURN n.name ORDER BY n.name"
+                },		
+                {
+                    "final": true,                
+                    "query": "MATCH p=(n {domain:{result}})-[r]->(d) WHERE NOT d.domain=n.domain RETURN p",					
+					"startNode": "{}",
+                    "allowCollapse": false
                 }
             ]
         }	
