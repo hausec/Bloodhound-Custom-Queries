@@ -28,20 +28,20 @@
             ]
         },
 			{
-            "name": "List the groups of all owned users",
-            "queryList": [
-                {
-                    "final": true,
-                    "query": "MATCH (m:User) WHERE m.owned=TRUE WITH m MATCH p=(m)-[:MemberOf*1..]->(n:Group) RETURN p"
-                }
-            ]
-        },
-			{
             "name": "List all High Valued Targets",
             "queryList": [
                 {
                     "final": true,
                     "query": "MATCH (m) WHERE m.highvalue=TRUE RETURN m"
+                }
+            ]
+        },
+			{
+            "name": "List the groups of all owned users",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH (m:User) WHERE m.owned=TRUE WITH m MATCH p=(m)-[:MemberOf*1..]->(n:Group) RETURN p"
                 }
             ]
         },
@@ -317,6 +317,23 @@
                 }
             ]
         },
+        {
+            "name": "Find all sessions a user in a specific domain has",
+			"requireNodeSelect": true,
+            "queryList": [
+                {
+                    "final": false,
+                    "title": "Select source domain...",
+                    "query": "MATCH (n:Domain) RETURN n.name ORDER BY n.name"
+                },		
+                {
+                    "final": true,                
+                    "query": "MATCH p=(m:Computer)-[r:HasSession]->(n:User {domain:{result}}) RETURN p",					
+					"startNode": "{}",
+                    "allowCollapse": false
+                }
+            ]
+        },	
         {
             "name": "Find an object from domain 'A' that can do anything to a foreign object",
 			"requireNodeSelect": true,
