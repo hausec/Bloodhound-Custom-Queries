@@ -350,7 +350,7 @@
                     "allowCollapse": false
                 }
             ]
-        }
+        },
         {
             "name": "Find All edges any owned user has on a computer",
             "queryList": [
@@ -359,6 +359,6 @@
                     "query": "MATCH p=shortestPath((m:User)-[r]->(b:Computer)) WHERE m.owned RETURN p"
                 }
             ]
-        },
+        }
 	]
 }
