@@ -359,6 +359,87 @@
                     "query": "MATCH p=shortestPath((m:User)-[r]->(b:Computer)) WHERE m.owned RETURN p"
                 }
             ]
+        },
+        {
+            "name": "----------------------------------------AZURE QUERIES----------------------------------",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": ""
+                }
+            ]
+        },
+        {
+            "name": "Return All Azure Users that are part of the 'Global Administrator' Role",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH p =(n)-[r:AZGlobalAdmin*1..]->(m) RETURN p"
+                }
+            ]
+        },
+        {
+            "name": "Return All On-Prem users with edges to Azure",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH  p=(m:User)-[r:AZResetPassword|AZOwns|AZUserAccessAdministrator|AZContributor|AZAddMembers|AZGlobalAdmin|AZVMContributor|AZOwnsAZAvereContributor]->(n) WHERE m.objectid CONTAINS 'S-1-5-21' RETURN p"
+                }
+            ]
+        },
+        {
+            "name": "Find all paths to an Azure VM",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH p = (n)-[r]->(g:AZVM) RETURN p"
+                }
+            ]
+        },
+        {
+            "name": "Find all paths to an Azure KeyVault",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH p = (n)-[r]->(g:AZKeyVault) RETURN p"
+                }
+            ]
+        },
+        {
+            "name": "Return All Azure Users and their Groups",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH p=(m:AZUser)-[r:MemberOf]->(n) WHERE NOT m.objectid CONTAINS 'S-1-5' RETURN p"
+                }
+            ]
+        },
+        {
+            "name": "Return All Azure AD Groups that are synchronized with On-Premise AD",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH (n:Group) WHERE n.objectid CONTAINS 'S-1-5' AND n.azsyncid IS NOT NULL RETURN n"
+                }
+            ]
+        },
+        {
+            "name": "Find all Privileged Service Principals",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH p = (g:AZServicePrincipal)-[r]->(n) RETURN p"
+                }
+            ]
+        },
+        {
+            "name": "Find all Owners of Azure Applications",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH p = (n)-[r:AZOwns]->(g:AZApp) RETURN p"
+                }
+            ]
         }
 	]
 }
