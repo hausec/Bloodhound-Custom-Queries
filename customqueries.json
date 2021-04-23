@@ -142,7 +142,7 @@
             "queryList": [
                 {
                     "final": true,
-                    "query": "MATCH (H:Computer) WHERE H.operatingsystem =~ '.*(2000|2003|2008|xp|vista|7|me).*' RETURN H"
+                    "query": "MATCH (H:Computer) WHERE H.operatingsystem = '.*(2000|2003|2008|xp|vista|7|me).*' RETURN H"
                 }
             ]
         },
