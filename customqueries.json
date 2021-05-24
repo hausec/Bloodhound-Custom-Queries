@@ -45,6 +45,24 @@
                 }
             ]
         },
+			{
+            "name": "Find the Shortest path to a high value target from an owned object",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH p=shortestPath((g {owned:true})-[*1..]->(n {highvalue:true})) WHERE  g<>n return p"
+                }
+            ]
+        },
+			{
+            "name": "Find the Shortest path to a unconstrained delegation system from an owned object",
+            "queryList": [
+                {
+                    "final": true,
+                    "query": "MATCH (n) MATCH p=shortestPath((n)-[*1..]->(m:Computer {unconstraineddelegation: true})) WHERE NOT n=m AND n.owned = true RETURN p"
+                }
+            ]
+        },
         {
 
             "name": "Find all Kerberoastable Users",
@@ -356,7 +374,7 @@
             "queryList": [
                 {
                     "final": true,
-                    "query": "MATCH p=shortestPath((m:User)-[r]->(b:Computer)) WHERE m.owned RETURN p"
+                    "query": "MATCH p=shortestPath((m:User)-[r*]->(b:Computer)) WHERE m.owned RETURN p"
                 }
             ]
         },
