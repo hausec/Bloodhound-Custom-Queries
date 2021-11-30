@@ -346,7 +346,7 @@
                 },		
                 {
                     "final": true,                
-                    "query": "MATCH p=(m:Computer)-[r:HasSession]->(n:User {domain:{result}}) RETURN p",					
+                    "query": "MATCH p=(m:Computer)-[r:HasSession]->(n:User {domain:$result}) RETURN p",					
 					"startNode": "{}",
                     "allowCollapse": false
                 }
